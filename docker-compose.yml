@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  pg11:
+    build:
+      context: .
+      dockerfile: ./build/pg11/Dockerfile
+      args:
+        - DB_LANG=ja_JP
+    container_name: "pg11"
+    ports:
+      - 5432:5432
+    env_file:
+      - ./conf/my.env
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./share:/mnt/share
+
